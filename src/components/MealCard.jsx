@@ -38,7 +38,7 @@ export default function MealCard({ meal }) {
       </Link>
       <button
         onClick={toggleFavorite}
-        className="absolute top-3 right-3 p-1 rounded-full bg-white shadow hover:scale-110 transition"
+        className="absolute top-3 right-3    shadow hover:scale-110 transition"
       >
         <Heart
           className="w-5 h-5"

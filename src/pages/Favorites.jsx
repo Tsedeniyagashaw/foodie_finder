@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import MealCard from '../components/MealCard'
 
 export default function Favorites() {
@@ -31,7 +32,14 @@ export default function Favorites() {
       ) : (
         <div className="text-center text-gray-500 mt-10">
           <p className="text-lg">🍽️ You haven't added any favorites yet.</p>
-          <p className="text-sm mt-2">Explore meals and click the ❤️ icon to save them here!</p>
+          <p className="text-sm mt-2 mb-4">Explore meals and click the ❤️ icon to save them here!</p>
+
+          <Link
+            to="/"
+            className="inline-block bg-red-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-red-700 transition"
+          >
+            Explore Meals
+          </Link>
         </div>
       )}
     </div>

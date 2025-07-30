@@ -45,7 +45,7 @@ export default function Header() {
         </Link>
       </nav>
 
-      {/* Mobile menu button */}
+
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="md:hidden text-red-500 "
@@ -68,7 +68,6 @@ export default function Header() {
         </svg>
       </button>
 
-      {/* Mobile nav menu */}
       {isOpen && (
         <nav className="absolute top-full right-0 mt-2 w-40 bg-black rounded shadow-md flex flex-col z-50">
           <Link

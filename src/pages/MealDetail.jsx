@@ -56,18 +56,17 @@ export default function MealDetail() {
 
  return (
   <>
-    {/* Top container with light red bg and shadow */}
+
     <div className="p-4 sm:p-6 md:p-10 max-w-7xl mx-auto bg-yellow-50 shadow-lg rounded-xl font-inter text-gray-800">
       <h2 className="text-4xl md:text-5xl font-extrabold text-left text-red-600 mb-10 tracking-tight">
         {meal.strMeal}
       </h2>
 
-      {/* Two columns layout */}
+    
       <div className="flex flex-col md:flex-row gap-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[600px]">
 
-        {/* Left column with Image, Category, Origin, Ingredients */}
         <div className="md:w-1/3 flex flex-col gap-8">
-          {/* Image */}
+      
           <div className="rounded-lg shadow-md overflow-hidden flex-shrink-0">
             <img
               src={meal.strMealThumb}
@@ -76,22 +75,19 @@ export default function MealDetail() {
             />
           </div>
 
-          {/* Category and Origin side by side */}
           <div className="flex gap-4">
-            {/* Category Card */}
+           
             <div className="flex items-center gap-3 bg-gray-50 rounded-md p-4 shadow-sm flex-1">
               <UtensilsCrossed className="text-red-500 w-5 h-5" />
               <p className="text-base text-gray-800 font-medium">{meal.strCategory}</p>
             </div>
 
-            {/* Origin Card */}
             <div className="flex items-center gap-3 bg-gray-50 rounded-md p-4 shadow-sm flex-1">
               <Globe className="text-red-500 w-5 h-5" />
               <p className="text-base text-gray-800 font-medium">{meal.strArea}</p>
             </div>
           </div>
 
-          {/* Ingredients */}
           <div className="flex-grow overflow-y-auto max-h-[350px]">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Ingredients</h2>
             <div className="flex flex-wrap gap-3">
@@ -114,7 +110,6 @@ export default function MealDetail() {
           </div>
         </div>
 
-        {/* Right column with Instructions */}
         <div className="md:w-2/3 flex flex-col flex-grow">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Instructions</h2>
           <div className="bg-gray-50 rounded-md p-5 shadow-sm text-gray-700 flex-grow overflow-y-auto">
@@ -132,7 +127,6 @@ export default function MealDetail() {
         </div>
       </div>
 
-      {/* YouTube Section */}
       {meal.strYoutube && (
         <div className="mt-14 max-w-4xl">
           <h3 className="text-2xl font-semibold text-red-600 mb-4 text-left">Watch Recipe</h3>
@@ -148,7 +142,6 @@ export default function MealDetail() {
       )}
     </div>
 
-    {/* Related Meals outside the red bg & shadow container */}
     <div className="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h3 className="text-2xl font-semibold text-red-600 mb-6">Related Meals</h3>
       {relatedMeals.length > 0 ? (
