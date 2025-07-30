@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 
 export default function SearchBanner({ value, onChange, onSubmit }) {
   const [meal, setMeal] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchMeal() {
@@ -12,50 +13,71 @@ export default function SearchBanner({ value, onChange, onSubmit }) {
         setMeal(response.data.meals[0]);
       } catch (error) {
         console.error("Error fetching meal:", error);
+      } finally {
+        setLoading(false);
       }
     }
-
     fetchMeal();
   }, []);
 
   return (
-    <div className="relative w-full h-[200px]">
-      {meal && (
-         <img
-        src="https://www.themealdb.com/images/media/meals/vtqxtu1511784197.jpg"
-        alt="Spaghetti Bolognese"
-        className="absolute inset-0 w-full h-full object-cover brightness-75"
-      />
+    <div className="relative w-full h-[220px] md:h-[280px] lg:h-[320px]">
+      {meal && !loading && (
+        <>
+          <img
+            src={meal.strMealThumb}
+            alt={meal.strMeal}
+            className="absolute inset-0 w-full h-full object-cover brightness-75 transition-opacity duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 pointer-events-none" />
+        </>
       )}
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-        <h2 className="text-white text-3xl font-bold mb-4 drop-shadow-lg">Find Your Favorite Meal</h2>
-     <form onSubmit={onSubmit} className="w-full max-w-xl mx-auto px-4 py-6">
-      <div className="relative">
-  
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <Search className="w-5 h-5 text-white opacity-70" />
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-lg font-semibold">
+          Loading...
         </div>
+      )}
 
-  
-        <input
-          type="search"
-          className="block w-full p-4 pl-10 text-sm text-white border border-white/30 rounded-full bg-transparent backdrop-blur-sm placeholder-white/70 focus:ring-white focus:border-white"
-          placeholder="Search meals..."
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        />
-
-    
-        <button
-          type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2"
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+        <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 drop-shadow-lg">
+          Find Your Favorite Meal
+        </h2>
+        {meal && !loading && (
+          <p className="text-sm sm:text-base text-white/80 italic mb-6 max-w-xl drop-shadow">
+            Try searching or get inspired by "{meal.strMeal}" from {meal.strArea}
+          </p>
+        )}
+        <form
+          onSubmit={onSubmit}
+          className="w-full max-w-xl mx-auto"
+          role="search"
+          aria-label="Search meals"
         >
-          Search
-        </button>
-      </div>
-    </form>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+              <Search className="w-5 h-5 text-white opacity-70" />
+            </div>
+            <input
+              type="search"
+              className="block w-full p-4 pl-12 text-sm sm:text-base text-white rounded-full bg-black/30 backdrop-blur-sm placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+              placeholder="Search meals by ingredient, country, or name..."
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              aria-label="Search meals"
+              spellCheck="false"
+              autoComplete="off"
+            />
+           <button
+  type="submit"
+  className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 font-semibold rounded-full text-xs sm:text-sm px-4 py-1.5 text-white shadow-lg transition"
+  aria-label="Submit search"
+>
+  Search
+</button>
 
+          </div>
+        </form>
       </div>
     </div>
   );
